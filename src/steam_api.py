@@ -1,6 +1,6 @@
 """
 
-A simple script to fetch a single skin's data. 
+Parsing functions for the Steam API to get CS2 skin prices and names.
 
 """
 
@@ -44,7 +44,9 @@ def get_all_skin_names(url, params=None, headers=None, timeout=10):
 # ------------ Testing ----------------     
 
 # skin_array = get_all_skin_names(skin_names_url)
+# print(fetch_request(url,"AK-47 | Redline (Field-Tested)",parameters))
 
+# This is attempting to get information for every single skin, this exhausts the API limit for requests. 
 # for skin in skin_array:
 #     info = fetch_request(url,skin,parameters)
 #     print(info)
