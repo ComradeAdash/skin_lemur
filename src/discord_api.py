@@ -1,14 +1,10 @@
-import os
-import steam_api
+import steam_skins
 import discord
+import weapon_skin
 from discord.ext import commands
 from discord import app_commands
-from dotenv import load_dotenv
 
-load_dotenv(".env")
-token = os.getenv("DISCORD_TOKEN")
-
-# Class that pulls in the discord client, essentially how the bot actually runs
+theSkin = weapon_skin.Weapon_skin()
 
 class Client(commands.Bot):
     async def on_ready(self):                      # when the bot has connected to the server
@@ -25,8 +21,8 @@ class Client(commands.Bot):
         if message.author == self.user:
             return                                 # the bot shouldn't respond to itself
         
-        if message.content.startswith('benzos'):
-            await message.channel.send(f' YOOOOOO Shhhhhhhhh, i got some perkies but keep it on the low... :3') 
+        if message.content.startswith('meow'):
+            await message.channel.send(f'MEOW') 
 
 intents = discord.Intents.default()                # this is required to specify what the bot can do
 intents.message_content = True
@@ -39,6 +35,12 @@ async def sayHello(interaction: discord.Interaction):
 
 @client.tree.command(name="printer",description="I print whatever is given to me", guild=GUILD_ID)
 async def printer(interaction: discord.Interaction, printer: str):
-    await interaction.response.send_message(printer)
+    await interaction.response.defer()
 
-client.run(token)            
+    result = theSkin.search_skin(printer)
+    if result:
+        skin_name = result
+        data = steam_skins.fetch_request(skin_name, steam_skins.parameters)
+        await interaction.followup.send(str(data))
+    else:
+        await interaction.followup.send("Skin not found or invalid query.")

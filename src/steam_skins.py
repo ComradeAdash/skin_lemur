@@ -1,14 +1,10 @@
 """
 
-Parsing functions for the Steam API to get CS2 skin prices and names.
+Request methods for the Steam API to get CS2 skin prices and names.
 
 """
 
 import requests
-import urllib.parse
-import math
-import time
-import re
 
 the_skin = "" 
 url = f"https://steamcommunity.com/market/priceoverview/"
@@ -16,15 +12,16 @@ skin_names_url = "https://raw.githubusercontent.com/ByMykel/CSGO-API/main/public
 parameters = { 
     "market_hash_name": the_skin,
     "appid": 730,
-    "currency" : 20, # code for CAD, USD is 1
+    "currency" : 20, # code for CAD, 1 is for USD
     "language" : "english",
     "format" : "json"
 }
 
-# ------------ Parsing Functions ----------------
+# ------------ Request Methods ----------------
 
-def fetch_request(url, the_skin, params=None, headers=None, timeout=10):
-    skin_data = None
+def fetch_request(the_skin, params=None, headers=None, timeout=10):
+    if params is None:
+        params = {}
     params.update({"market_hash_name": the_skin})
     response = requests.get(url, params=params, headers=headers, timeout=timeout)
     if response.status_code == 200:
@@ -44,9 +41,4 @@ def get_all_skin_names(url, params=None, headers=None, timeout=10):
 # ------------ Testing ----------------     
 
 # skin_array = get_all_skin_names(skin_names_url)
-# print(fetch_request(url,"AK-47 | Redline (Field-Tested)",parameters))
-
-# This is attempting to get information for every single skin, this exhausts the API limit for requests. 
-# for skin in skin_array:
-#     info = fetch_request(url,skin,parameters)
-#     print(info)
+# print(skin_array)
