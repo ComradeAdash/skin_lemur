@@ -4,8 +4,6 @@ import weapon_skin
 from discord.ext import commands
 from discord import app_commands
 
-theSkin = weapon_skin.Weapon_skin()
-
 class Client(commands.Bot):
     async def on_ready(self):                      # when the bot has connected to the server
         print(f'We have logged in as {self.user}')
@@ -37,7 +35,8 @@ async def sayHello(interaction: discord.Interaction):
 async def printer(interaction: discord.Interaction, printer: str):
     await interaction.response.defer()
 
-    result = theSkin.search_skin(printer)
+    result = weapon_skin.search_skin(printer)
+    
     if result:
         skin_name = result
         data = steam_skins.fetch_request(skin_name, steam_skins.parameters)
