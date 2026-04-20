@@ -31,11 +31,11 @@ GUILD_ID = discord.Object(id=1277759001123360800)
 async def sayHello(interaction: discord.Interaction):
     await interaction.response.send_message("Hi There!")
 
-@client.tree.command(name="printer",description="I print whatever is given to me", guild=GUILD_ID)
-async def printer(interaction: discord.Interaction, printer: str):
+@client.tree.command(name="skin",description="Displays the lowest price and median price of a selected weapon", guild=GUILD_ID)
+async def skin(interaction: discord.Interaction, skin: str):
     await interaction.response.defer()
 
-    result = weapon_skin.search_skin(printer)
+    result = weapon_skin.search_skin(skin)
     
     if result:
         skin_name = result

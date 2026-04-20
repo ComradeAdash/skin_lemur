@@ -1,19 +1,12 @@
-# cs_skin_tracker
+# Skin Lemur
 
-## How to Run 
-- Install Dependencies
+Skin Lemur is a discord bot that shows prices for Counter-Strike 2 skins currently listed on the steam marketplace
+- Weapon images and CSFloat prices are currently in the process of being added!! PLUS a lot more...
 
-    ## Windows
-    - python -m venv env (may need to use python3 if 'python' doesn't work.)'
-    - & .\env\bin\Activate.ps1
+## Usage
 
-    ## Mac & Linux
-    - python3 -m env env
-    - source env/bin/activate
+``` /skin ak47 vulcan ft ```
 
-    ## Install Requirements
+The query should be in the "WEAPON SKIN_NAME WEAR" format, as shown above. 
 
-    - pip install -r requirements.txt
-
-    - to exit the environment, enter "deactivate". 
 
