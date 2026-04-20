@@ -40,6 +40,13 @@ async def printer(interaction: discord.Interaction, printer: str):
     if result:
         skin_name = result
         data = steam_skins.fetch_request(skin_name, steam_skins.parameters)
-        await interaction.followup.send(str(data))
+        final_response = f'''
+
+            Skin Lemur has found {skin_name}!! OHHHhh YEAHHhh!! \n
+            Lowest Price: {data.get('lowest_price')}\n
+            Median price: {data.get('median_price')}\n
+
+        '''
+        await interaction.followup.send(str(final_response))
     else:
         await interaction.followup.send("Skin not found or invalid query.")
